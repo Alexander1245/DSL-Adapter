@@ -14,23 +14,27 @@ interface AdapterBuilder<T : Any, VB : ViewBinding> {
     fun viewHolder(block: ViewHolderBinder<T, VB>): AdapterBuilder<T, VB>
 }
 
+class AdapterBuilderImpl<T: Any, VB: ViewBinding> : AdapterBuilder<T, VB> {
+    var itemCallback = CallbackWrapper.ItemCallback<T> { old, new -> old == new }
+        private set
+    var binder: ViewHolderBinder<T, VB> = { _, _ -> }
+        private set
+
+    override fun itemCallback(callback: CallbackWrapper.ItemCallback<T>): AdapterBuilder<T, VB> =
+        apply {
+            itemCallback = callback
+        }
+
+    override fun viewHolder(block: ViewHolderBinder<T, VB>): AdapterBuilder<T, VB> =
+        apply {
+            binder = block
+        }
+}
+
 inline fun <T : Any, reified VB : ViewBinding> adapter(
     block: AdapterBuilderScope<T, VB>,
 ): CommonAdapter<T, VB> {
-    val builder = object : AdapterBuilder<T, VB> {
-        var itemCallback = CallbackWrapper.ItemCallback<T> { old, new -> old == new }
-        var binder: ViewHolderBinder<T, VB> = { _, _ -> }
-
-        override fun itemCallback(callback: CallbackWrapper.ItemCallback<T>): AdapterBuilder<T, VB> =
-            apply {
-                itemCallback = callback
-            }
-
-        override fun viewHolder(block: ViewHolderBinder<T, VB>): AdapterBuilder<T, VB> =
-            apply {
-                binder = block
-            }
-    }
+    val builder = AdapterBuilderImpl<T, VB>()
     block(builder)
     return object : DslAdapter<T, VB>(builder.itemCallback, builder.binder) {
         override fun provideBinding(parent: ViewGroup, viewType: Int): VB = createBinding(parent)
