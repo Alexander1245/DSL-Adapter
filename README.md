@@ -28,7 +28,7 @@ dependencyResolutionManagement {
     }
 }
 ```
-3. Add a dependency to the build.gradle of your module
+3. Add a dependency to the build.gradle of your module(you can view the last available version in the release tags section)
 ```groovy
 dependencies {
         implementation 'com.github.Alexander1245:DSL-Adapter:1.0.0'
