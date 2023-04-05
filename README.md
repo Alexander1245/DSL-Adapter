@@ -4,7 +4,10 @@ Compose-like RecyclerView Adapter
 Make developing of your lists simpler!</br>
 For now you can simply call buildAdapter(...) function and that's all, your adapter is ready to use.
 
+The adapter is inherited from the ListAdapter, it means that you may not worry about performance issues.
 
+
+Installation:
 1. Enable viewBinding in build.gradle of your android application or library module
 ```groovy
 android {
