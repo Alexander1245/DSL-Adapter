@@ -2,14 +2,22 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
+    android:background="#685252"
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/textViewPetName"
+        android:id="@+id/textViewPersonName"
         android:layout_width="match_parent"
         android:textSize="@dimen/sample_text_size"
         android:gravity="center"
         android:textColor="@color/black"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
 
+    <TextView
+        android:id="@+id/textViewPersonAge"
+        android:layout_width="match_parent"
+        android:textSize="@dimen/sample_text_size"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:layout_height="wrap_content" />
 </LinearLayout>
