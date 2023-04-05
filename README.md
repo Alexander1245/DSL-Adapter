@@ -7,14 +7,31 @@ For now you can simply call buildAdapter(...) function and that's all, your adap
 The adapter is inherited from the ListAdapter, it means that you may not worry about performance issues.
 
 
-Installation:
-1. Enable viewBinding in build.gradle of your android application or library module
+**Installation:**
+1. Enable viewBinding in the build.gradle of your android application or the library module
 ```groovy
 android {
 ...
 viewBinding {
         enable true
     }
+}
+```
+2. Add following repositories to the settings.gradle
+```groovy
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url "https://jitpack.io" }
+    }
+}
+```
+3. Add a dependency to the build.gradle of your module
+```groovy
+dependencies {
+        implementation 'com.github.Alexander1245:DSL-Adapter:1.0.0'
 }
 ```
 
